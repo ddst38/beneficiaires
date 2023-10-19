@@ -7,4 +7,4 @@ spec:
   buildImage:
     image: "paketobuildpacks/build-jammy-base"
   runImage:
-    image: "paketobuildpacks/run-jammy-base"
+    image: "paketobuildpacks/run-jammy-full"

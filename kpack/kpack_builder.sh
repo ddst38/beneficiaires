@@ -29,13 +29,67 @@ if [[ "${1}" == "build" ]]; then
      echo "Build de l'image...."
      kubectl apply -f cnam-image-beneficiaires.yaml
      # temporisation
-     for p in {1..10}; do
+     for p in {1..30}; do
      echo -ne "#"
      sleep 1
      done
      echo -e " \n"
+     echo "Phase Prepare"
+     echo -e " \n"
+     kubectl logs --follow -n default cnam-image-beneficiaires-build-1-build-pod -c prepare
+     # temporisation
+     for p in {1..30}; do
+     echo -ne "#"
+     sleep 1
+     done
+     echo -e " \n"
+     echo "Phase Analyze"
+     echo -e " \n"     
+     kubectl logs --follow -n default cnam-image-beneficiaires-build-1-build-pod -c analyze
+     # temporisation
+     for p in {1..30}; do
+     echo -ne "#"
+     sleep 1
+     done
+     echo -e " \n"
+     echo "Phase Detect"
+     echo -e " \n"
+     kubectl logs --follow -n default cnam-image-beneficiaires-build-1-build-pod -c detect
+     # temporisation
+     for p in {1..30}; do
+     echo -ne "#"
+     sleep 1
+     done
+     echo -e " \n"
+     echo "Phase Restore"
+     echo -e " \n"
+     kubectl logs --follow -n default cnam-image-beneficiaires-build-1-build-pod -c restore
+     # temporisation
+     for p in {1..30}; do
+     echo -ne "#"
+     sleep 1
+     done
+     echo -e " \n"
+     echo "Phase Build"
+     echo -e " \n"
      kubectl logs --follow -n default cnam-image-beneficiaires-build-1-build-pod -c build
+     # temporisation
+     for p in {1..30}; do
+     echo -ne "#"
+     sleep 1
+     done
+     echo -e " \n"
+     echo "Phase Export"
+     echo -e " \n"
      kubectl logs --follow -n default cnam-image-beneficiaires-build-1-build-pod -c export
+     # temporisation
+     for p in {1..30}; do
+     echo -ne "#"
+     sleep 1
+     done
+     echo -e " \n"
+     echo "Phase Completion"
+     echo -e " \n"
      kubectl logs --follow -n default cnam-image-beneficiaires-build-1-build-pod -c completion
      exit
 fi
@@ -44,17 +98,16 @@ if [[ "${1}" == "remove" ]]; then
      kubectl delete -f cnam-image-beneficiaires.yaml
      exit
 fi
-if [[ "${1}" == "patch" ]]; then
-     if [[ -z "${2}" ]]; then
-          echo "indiquer un id de revision"
-          exit
-     fi
-     echo "Patch de l'image...."
-     -p '{"spec":{"unschedulable":true}}'
-     kubectl patch -f cnam-image-builder.yaml -p '{"spec":{"source":{"git":{"revision":"${2}"}}}'
-     exit
-fi
+
 if [[ "${1}" == "logs" ]]; then
+     # if [[ -z "${2}" ]]; then
+     #      echo "indiquer un pod de build"
+     #      exit
+     # fi
+     kubectl logs --follow -n default cnam-image-beneficiaires-build-1-build-pod -c prepare
+     kubectl logs --follow -n default cnam-image-beneficiaires-build-1-build-pod -c analyze
+     kubectl logs --follow -n default cnam-image-beneficiaires-build-1-build-pod -c detect
+     kubectl logs --follow -n default cnam-image-beneficiaires-build-1-build-pod -c restore
      kubectl logs --follow -n default cnam-image-beneficiaires-build-1-build-pod -c build
      kubectl logs --follow -n default cnam-image-beneficiaires-build-1-build-pod -c export
      kubectl logs --follow -n default cnam-image-beneficiaires-build-1-build-pod -c completion

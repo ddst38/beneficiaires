@@ -7,7 +7,7 @@ spec:
   tag: synapsety/beneficiaires:kpack 
   serviceAccountName: cnam-service-account
   builder:
-    name: my-builder
+    name: cnam-image-builder
     kind: Builder
   source:
     git:

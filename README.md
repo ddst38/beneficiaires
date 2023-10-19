@@ -240,3 +240,12 @@ ou Lancer l'application en mode client:
 ```shell
 docker run -it -eBENEF_CLI=yes --name beneficiaires-kpack-cli synapsety/beneficiaires:kpack
 ```
+pas de recherche d'update sur les images socles:
+https://github.com/buildpacks-community/kpack/blob/main/docs/stack.md
+
+prise ne charge des sides-cars:
+https://github.com/buildpacks-community/kpack/blob/main/docs/injected_sidecars.md
+
+c'est l'image qui surveille pour les changements:
+https://github.com/buildpacks-community/kpack/blob/main/docs/image.md
+

@@ -217,3 +217,26 @@ ou Lancer l'application en mode client:
 docker run -it -eBENEF_CLI=yes --name beneficiaires-native-x-cli beneficiaires:native-x
 ```
 
+## Approche Kpack CNB sur Kubernetes
+```
+Builder : cloudfoundry/cnb:bionic sur kpack
+Application : Mode FatJar
+```
+build from Kubernetes ressources (3m26):
+Dans le repertoire kpack:
+installer les ressources :
+```shell
+./kpack_builder.sh install
+```
+lancer le build de l'image:
+```shell
+./kpack_builder.sh build
+```
+Lancer l'application:
+```shell
+docker run -it -p 8592:8079 --name beneficiaires-kpack synapsety/beneficiaires:kpack
+```
+ou Lancer l'application en mode client:
+```shell
+docker run -it -eBENEF_CLI=yes --name beneficiaires-kpack-cli synapsety/beneficiaires:kpack
+```

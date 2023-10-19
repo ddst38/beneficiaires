@@ -1,0 +1,55 @@
+server:
+  port : 8079
+spring:
+  sql:
+    init:
+      encoding: UTF-8
+      enabled: true
+      platform: h2
+  datasource:
+    # Définition explicite de l'url pour avoir un nom de base non aléatoire
+    # et pouvoir utiliser la console H2
+    url: jdbc:h2:mem:jdbcdb
+  h2:
+    # Permet d'activer la console H2. Les informations de connexion sont :
+    #  - url : localhost:{server.port}{server.servlet.context-path}/h2-console
+    #  - JDBC URL : jdbc:h2:mem:jdbcdb
+    #  - User name : sa
+    #  - Password : laisser vide
+    console:
+      enabled: true
+      
+usecase:
+  request:
+    create-beneficiaire: >-
+      INSERT INTO skmb_beneficiaire_jdbc(matricule, date_naissance, rang ,nom, prenom)
+      VALUES(:matricule, :date_naissance, :rang, :nom, :prenom)
+    find-beneficiaire:
+      by-id: >-
+        SELECT beneficiaire_id, matricule, date_naissance, rang ,nom, prenom
+        FROM skmb_beneficiaire_jdbc
+        WHERE beneficiaire_id=:beneficiaire_id
+      by-keys: >-
+        SELECT beneficiaire_id, matricule, date_naissance, rang ,nom, prenom
+        FROM skmb_beneficiaire_jdbc
+        WHERE matricule=:matricule AND date_naissance=:date_naissance AND rang=:rang
+      by-matricule: >-
+        SELECT beneficiaire_id, matricule, date_naissance, rang ,nom, prenom
+        FROM skmb_beneficiaire_jdbc
+        WHERE matricule=:matricule ORDER BY beneficiaire_id
+    update-beneficiaire:
+      by-keys: >-
+        UPDATE skmb_beneficiaire_jdbc
+        SET prenom=:prenom, nom=:nom
+        WHERE matricule=:matricule AND date_naissance=:date_naissance AND rang=:rang
+      by-id: >-
+        UPDATE skmb_beneficiaire_jdbc
+        SET matricule=:matricule, date_naissance=:date_naissance, rang=:rang, prenom=:prenom, nom=:nom
+        WHERE beneficiaire_id=:beneficiaire_id
+    delete-beneficiaire:
+      by-keys: >-
+        DELETE FROM skmb_beneficiaire_jdbc
+        WHERE matricule=:matricule AND date_naissance=:date_naissance AND rang=:rang
+      by-id: >-
+        DELETE FROM skmb_beneficiaire_jdbc
+        WHERE beneficiaire_id=:beneficiaire_id

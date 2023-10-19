@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-BeneficiairesApplication<beneficiaires>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "fr.cnam.beneficiaire.BeneficiairesApplication",
+            "projectName": "beneficiaires",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

@@ -28,6 +28,12 @@ fi
 if [[ "${1}" == "build" ]]; then
      echo "Build de l'image...."
      kubectl apply -f cnam-image-beneficiaires.yaml
+     # temporisation
+     for p in {1..10}; do
+     echo -ne "#"
+     sleep 1
+     done
+     echo -e " \n"
      kubectl logs --follow -n default cnam-image-beneficiaires-build-1-build-pod -c build
      kubectl logs --follow -n default cnam-image-beneficiaires-build-1-build-pod -c export
      kubectl logs --follow -n default cnam-image-beneficiaires-build-1-build-pod -c completion
@@ -35,7 +41,7 @@ if [[ "${1}" == "build" ]]; then
 fi
 if [[ "${1}" == "remove" ]]; then
      echo "Suppression de l'image...."
-     kubectl delete -f cnam-image-builder.yaml
+     kubectl delete -f cnam-image-beneficiaires.yaml
      exit
 fi
 if [[ "${1}" == "patch" ]]; then
@@ -46,5 +52,11 @@ if [[ "${1}" == "patch" ]]; then
      echo "Patch de l'image...."
      -p '{"spec":{"unschedulable":true}}'
      kubectl patch -f cnam-image-builder.yaml -p '{"spec":{"source":{"git":{"revision":"${2}"}}}'
+     exit
+fi
+if [[ "${1}" == "logs" ]]; then
+     kubectl logs --follow -n default cnam-image-beneficiaires-build-1-build-pod -c build
+     kubectl logs --follow -n default cnam-image-beneficiaires-build-1-build-pod -c export
+     kubectl logs --follow -n default cnam-image-beneficiaires-build-1-build-pod -c completion
      exit
 fi

@@ -38,3 +38,13 @@ if [[ "${1}" == "remove" ]]; then
      kubectl delete -f cnam-image-builder.yaml
      exit
 fi
+if [[ "${1}" == "patch" ]]; then
+     if [[ -z "${2}" ]]; then
+          echo "indiquer un id de revision"
+          exit
+     fi
+     echo "Patch de l'image...."
+     -p '{"spec":{"unschedulable":true}}'
+     kubectl patch -f cnam-image-builder.yaml -p '{"spec":{"source":{"git":{"revision":"${2}"}}}'
+     exit
+fi

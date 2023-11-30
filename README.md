@@ -1,4 +1,4 @@
-Nettoyage
+declenchement par triggers
 ## Approche JDK
 ```
 Builder : Dockerfile multi-stage

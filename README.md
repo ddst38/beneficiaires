@@ -1,4 +1,4 @@
-declenchement par triggers
+declenchement pour demo
 ## Approche JDK
 ```
 Builder : Dockerfile multi-stage

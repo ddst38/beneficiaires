@@ -1,4 +1,4 @@
-declenchement pour democnam
+declenchement pour democnam avec catch logs
 ## Approche JDK
 ```
 Builder : Dockerfile multi-stage

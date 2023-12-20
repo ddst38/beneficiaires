@@ -1,4 +1,4 @@
-declenchement pour demo seb
+declenchement pour demo
 ## Approche JDK
 ```
 Builder : Dockerfile multi-stage

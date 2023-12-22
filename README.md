@@ -1,4 +1,4 @@
-declenchement pour demo 2
+declenchement pour fred
 ## Approche JDK
 ```
 Builder : Dockerfile multi-stage

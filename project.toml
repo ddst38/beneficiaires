@@ -1,16 +1,23 @@
-[_]
-schema-version = "0.2"
-id = "io.buildpacks.bash-script"
-name = "Bash Script Greg"
-version = "1.0.0"
-
-[io.buildpacks]
+[build]
 exclude = [
     "/README.md",
-    "bash-script-buildpack"
 ]
 
-include = []
+  [[build.buildpacks]]
+  uri = "paketo-buildpacks/web-servers"
 
-[[io.buildpacks.group]]
-uri = "bash-script-buildpack/"
+  [[ build.env ]]
+    name="BP_NODE_RUN_SCRIPTS"
+    value="build"
+
+  [[ build.env ]]
+    name="BP_WEB_SERVER"
+    value="httpd"
+
+  [[ build.env ]]
+    name="BP_WEB_SERVER_ROOT"
+    value="build"
+
+  [[ build.env ]]
+    name="BP_WEB_SERVER_ENABLE_PUSH_STATE"
+    value="true"

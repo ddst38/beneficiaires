@@ -1,4 +1,4 @@
-declenchement pour fred
+version avec buildpack.toml
 ## Approche JDK
 ```
 Builder : Dockerfile multi-stage

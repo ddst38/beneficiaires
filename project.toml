@@ -1,0 +1,16 @@
+[_]
+schema-version = "0.2"
+id = "io.buildpacks.bash-script"
+name = "Bash Script Greg"
+version = "1.0.0"
+
+[io.buildpacks]
+exclude = [
+    "/README.md",
+    "bash-script-buildpack"
+]
+
+include = []
+
+[[io.buildpacks.group]]
+uri = "bash-script-buildpack/"
